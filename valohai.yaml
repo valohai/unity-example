@@ -8,8 +8,9 @@
       - cd /valohai/inputs/imgen-binary
       - tar -xzf ./*.tgz
       - ./imgen.x86_64 -logfile
-      - tar -cvzf imgen-images.tgz ./*.png
-      - mv imgen-images.tgz /valohai/outputs/
+      - export DATETIME=$(date '+%Y-%m-%d-%H-%M-%S')
+      - tar -cvzf imgen-images-$DATETIME.tgz ./*.png
+      - mv imgen-images-$DATETIME.tgz /valohai/outputs/
     inputs:
       - name: imgen-binary
         default: https://valohai-examples.s3.amazonaws.com/unity/imgen/imgen-b5a248f.tgz
