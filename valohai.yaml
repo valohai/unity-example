@@ -1,0 +1,23 @@
+- step:
+    name: generate-images
+    image: tensorflow/tensorflow:1.5.0-devel-gpu
+    command:
+      - apt update -qq
+      - apt install -qqq -y --no-install-recommends lwm
+      - lwm &
+      - cd /valohai/inputs/imgen-binary
+      - tar -xzf ./*.tgz
+      - ./imgen.x86_64 -logfile
+      - tar -cvzf imgen-images.tgz ./*.png
+      - mv imgen-images.tgz /valohai/outputs/
+    inputs:
+      - name: imgen-binary
+        default: https://valohai-examples.s3.amazonaws.com/unity/imgen/imgen-b5a248f.tgz
+
+- step:
+    name: worker-check
+    image: tensorflow/tensorflow:1.5.0-devel-gpu
+    command:
+      - nvidia-smi
+      - python --version
+      - printenv
