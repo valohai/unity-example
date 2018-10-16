@@ -19,7 +19,7 @@
     name: train-model
     image: tensorflow/tensorflow:1.5.0-devel-gpu
     command:
-      - tar -xzf /valohai/inputs/images/*.tgz -C /valohai/inputs/images
+      - ls /valohai/inputs/images/*.tgz | xargs -i tar -xzf {} -C /valohai/inputs/images
       - python train.py
     inputs:
       - name: images
