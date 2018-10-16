@@ -15,6 +15,15 @@
         default: https://valohai-examples.s3.amazonaws.com/unity/imgen/imgen-b5a248f.tgz
 
 - step:
+    name: train-model
+    image: tensorflow/tensorflow:1.5.0-devel-gpu
+    command:
+      - tar -xzf /valohai/inputs/images/*.tgz -C /valohai/inputs/images
+      - python train.py
+    inputs:
+      - name: images
+
+- step:
     name: worker-check
     image: tensorflow/tensorflow:1.5.0-devel-gpu
     command:
