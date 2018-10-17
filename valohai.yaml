@@ -20,9 +20,15 @@
     image: tensorflow/tensorflow:1.5.0-devel-gpu
     command:
       - ls /valohai/inputs/images/*.tgz | xargs -i tar -xzf {} -C /valohai/inputs/images
-      - python train.py
+      - python train.py {parameters}
     inputs:
       - name: images
+    parameters:
+      - name: epochs
+        pass-as: --epochs={v}
+        description: Number of steps to run the trainer
+        type: integer
+        default: 200
 
 - step:
     name: worker-check
