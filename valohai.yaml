@@ -11,6 +11,13 @@
       - export DATETIME=$(date '+%Y-%m-%d-%H-%M-%S')
       - tar -cvzf imgen-images-$DATETIME.tgz ./*.png
       - mv imgen-images-$DATETIME.tgz /valohai/outputs/
+    environment-variables:
+      - name: VH_XORG
+        default: "1"
+      - name: IMGEN_TAKE_SCREENSHOTS
+        default: "1"
+      - name: IMGEN_LOOP
+        default: "1"
     inputs:
       - name: imgen-binary
         default: https://valohai-examples.s3.amazonaws.com/unity/imgen/imgen-b5a248f.tgz
